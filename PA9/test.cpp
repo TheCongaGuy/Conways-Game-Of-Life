@@ -142,7 +142,7 @@ void printGridTest()
 	}
 }
 
-void printCell()
+void printCellTest()
 {
 	Cell test(25, 25, 25, 25);
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Grid Test");

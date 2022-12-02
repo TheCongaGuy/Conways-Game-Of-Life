@@ -27,8 +27,12 @@ void graphicsTest();
 // Programmer: Drew Evensen
 void printGridTest();
 
+// Test function prints a cell to the screen
+// Programmers: Kaitlyn Cornish, Drew Evensen
 void printCellTest();
 
+// Programmers: Kaitlyn Cornish, Drew Evensen
 void printAliveCellTest();
 
+// Programmers: Kaitlyn Cornish, Drew Evensen
 void printDeadCellTest();

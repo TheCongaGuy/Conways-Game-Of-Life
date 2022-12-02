@@ -1,7 +1,7 @@
 #pragma once
 
 /*******************************************************************************
- * Programmers: ____________		                                           *
+ * Programmers: Kaitlyn Cornish		                                           *
  * Class: CptS 122				                                               *
  * Programming Assignment: 9	                                               *
  * Date: 12/07/22                                                              *
@@ -16,12 +16,12 @@ class Cell
 public:
 
 	//constructor
-	Cell(float, float, float, float);
+	Cell(float positionx = 0.f, float positiony = 0.f, float widthx = 0.f, float heighty = 0.f);
 
 	//deconstructor
 	~Cell();
 
-	virtual void cellColor();
+	//virtual void cellColor();  <- Throwing Linker Errors : Drew Evensen
 
 	void drawCell(sf::RenderWindow& window);
 

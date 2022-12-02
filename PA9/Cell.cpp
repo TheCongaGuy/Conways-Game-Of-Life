@@ -1,5 +1,14 @@
 #include "Cell.hpp"
 
+/*******************************************************************************
+ * Programmers: Kaitlyn Cornish		                                           *
+ * Class: CptS 122				                                               *
+ * Programming Assignment: 9	                                               *
+ * Date: 12/07/22                                                              *
+ *                                                                             *
+ * Description:																   *
+ *******************************************************************************/
+
 Cell::Cell(float positionx, float positiony, float widthx, float heighty)
 {
 	x = positionx;
@@ -22,11 +31,7 @@ sf::RectangleShape Cell::cellShape()
 
 void Cell::drawCell(sf::RenderWindow& window)
 {
-	for (int i = 0; i < width; i++) {
-		for (int j = 0; j < height; j++) {
-			window.draw();
-		}
-	}
+	window.draw(rectangleShape);
 }
 
 Cell::~Cell()
