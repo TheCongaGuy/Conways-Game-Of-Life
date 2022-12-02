@@ -16,6 +16,7 @@
 #include <Windows.h>
 #include <time.h>
 #include "Grid.hpp"
+#include "Cell.hpp"
 
 // Test function that demonstrates a visualization of selection sort for the purposes of checking and understanding 
 // the graphics library
@@ -25,3 +26,9 @@ void graphicsTest();
 // Test function prints the grid to the screen
 // Programmer: Drew Evensen
 void printGridTest();
+
+void printCellTest();
+
+void printAliveCellTest();
+
+void printDeadCellTest();

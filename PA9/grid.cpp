@@ -63,3 +63,4 @@ void Grid::printGrid(sf::RenderWindow& window)
 	for (int i = 0; i < dividerCount; i++)
 		window.draw(dividers[i]);
 }
+

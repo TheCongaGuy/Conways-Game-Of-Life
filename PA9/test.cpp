@@ -141,3 +141,25 @@ void printGridTest()
 		window.display();
 	}
 }
+
+void printCell()
+{
+	Cell test(25, 25, 25, 25);
+	sf::RenderWindow window(sf::VideoMode(500, 500), "Grid Test");
+
+	while (window.isOpen())
+	{
+		// Catches events in the window
+		sf::Event event;
+
+		// Close the window upon clicking the X
+		while (window.pollEvent(event))
+			if (event.type == sf::Event::Closed)
+				window.close();
+
+		// Display the grid
+		window.clear();
+		test.drawCell(window);
+		window.display();
+	}
+}
