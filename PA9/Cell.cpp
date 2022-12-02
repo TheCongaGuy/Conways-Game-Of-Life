@@ -38,3 +38,13 @@ Cell::~Cell()
 {
 
 }
+
+void Cell::setX(int &newX)
+{
+	x = newX;
+}
+
+void Cell::setY(int& newY)
+{
+	y = newY;
+}

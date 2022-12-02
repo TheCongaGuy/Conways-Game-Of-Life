@@ -21,6 +21,13 @@ public:
 	//deconstructor
 	~Cell();
 
+	void setX(int &newX);
+
+	//set position of cells
+	void setY(int& newY);
+
+	void setCell(int& newCell);
+
 	//virtual void cellColor();  <- Throwing Linker Errors : Drew Evensen
 
 	void drawCell(sf::RenderWindow& window);
