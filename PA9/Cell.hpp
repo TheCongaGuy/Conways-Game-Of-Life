@@ -21,12 +21,9 @@ public:
 	//deconstructor
 	~Cell();
 
-	void setX(int &newX);
 
-	//set position of cells
-	void setY(int& newY);
 
-	void setCell(int& newCell);
+	void setCell(float &positionx, float &positiony, float &widthx, float &heighty);
 
 	//virtual void cellColor();  <- Throwing Linker Errors : Drew Evensen
 
@@ -42,7 +39,7 @@ private:
 	int x;
 	int y;
 
-	int width = 35;
-	int height = 35;
+	int width;
+	int height;
 
 };

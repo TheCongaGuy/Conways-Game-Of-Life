@@ -21,7 +21,8 @@ Cell::Cell(float positionx, float positiony, float widthx, float heighty)
 	rectangleShape.setPosition(positionx, positiony);
 
 	rectangleShape.setOutlineThickness(2);
-	rectangleShape.setOutlineColor(sf::Color(255, 0, 0));
+	rectangleShape.setOutlineColor(sf::Color(0, 0, 0));
+	rectangleShape.setFillColor(sf::Color(255, 0, 0));
 }
 
 sf::RectangleShape Cell::cellShape()
@@ -39,12 +40,15 @@ Cell::~Cell()
 
 }
 
-void Cell::setX(int &newX)
+void Cell::setCell(float& newpositionx, float& newpositiony, float& newwidthx, float& newheighty)
 {
-	x = newX;
+	x = newpositionx;
+	y = newpositiony;
+
+	width = newwidthx;
+	height = newheighty;
+
+	rectangleShape = sf::RectangleShape(sf::Vector2f(newwidthx, newheighty));
+	rectangleShape.setPosition(newpositionx, newpositiony);
 }
 
-void Cell::setY(int& newY)
-{
-	y = newY;
-}

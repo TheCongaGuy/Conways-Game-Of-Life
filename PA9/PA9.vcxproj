@@ -133,7 +133,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Alive.cpp" />
     <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="Dead.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test.cpp" />
