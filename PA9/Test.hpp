@@ -20,15 +20,15 @@
 
 // Test function that demonstrates a visualization of selection sort for the purposes of checking and understanding 
 // the graphics library
-// Programmer: Drew Evensen
+// Programmers: Drew Evensen
 void graphicsTest();
 
 // Test function prints the grid to the screen
-// Programmer: Drew Evensen
+// Programmers: Drew Evensen
 void printGridTest();
 
 // Test function prints a cell to the screen
-// Programmers: Kaitlyn Cornish, Drew Evensen
+// Programmers: Kaitlyn Cornish
 void printCellTest();
 
 // Programmers: Kaitlyn Cornish, Drew Evensen
@@ -36,3 +36,7 @@ void printAliveCellTest();
 
 // Programmers: Kaitlyn Cornish, Drew Evensen
 void printDeadCellTest();
+
+// Test function gets user input via clicks of a mouse and finds the correct cell they clicked on
+// Programmers: Drew Evensen
+void userInputTest();
