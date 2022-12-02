@@ -31,7 +31,7 @@ sf::RectangleShape Cell::cellShape()
 
 void Cell::drawCell(sf::RenderWindow& window)
 {
-	window.draw(rectangleShape);
+	window.draw(rectangleShape); // Fixed drawing to window : Drew Evensen
 }
 
 Cell::~Cell()

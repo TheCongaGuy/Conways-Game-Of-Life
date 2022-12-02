@@ -16,8 +16,8 @@ class Grid
 {
 public:
 	// Constructor
-	// Takes the number of cells in each x and y direction
-	Grid(int xCells = 1, int yCells = 1);
+	// Takes the number of cells in each x and y direction and the window to configure to
+	Grid(sf::RenderWindow& window, int xCells = 1, int yCells = 1);
 
 	// Destructor - PROBLEM: MEMORY LEAK
 	~Grid();
@@ -30,9 +30,9 @@ private:
 	// Dynamic 2D array of cells
 	Cell** cells;
 	//Number of items in each array
-	int collumnCellsCount;
-	int rowCellsCount;
+	int yCellsCount;
+	int xCellsCount;
 	int dividerCount;
-	// Array of rectangles to display the grid as line dividers
+	// Dynamic array of rectangles to display to the grid as line dividers
 	sf::RectangleShape* dividers;
 };

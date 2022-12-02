@@ -16,7 +16,7 @@ class Cell
 public:
 
 	//constructor
-	Cell(float positionx = 0.f, float positiony = 0.f, float widthx = 0.f, float heighty = 0.f);
+	Cell(float positionx = 0.f, float positiony = 0.f, float widthx = 1.f, float heighty = 1.f);
 
 	//deconstructor
 	~Cell();

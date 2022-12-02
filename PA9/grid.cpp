@@ -10,7 +10,7 @@
  *******************************************************************************/
 
 // Constructor
-Grid::Grid(int xCells, int yCells)
+Grid::Grid(sf::RenderWindow& window, int xCells, int yCells)
 {
 	// Ensure x and y are valid values
 	if (xCells < 1)
@@ -19,8 +19,8 @@ Grid::Grid(int xCells, int yCells)
 		yCells = 1;
 
 	// Record number of cells
-	collumnCellsCount = yCells;
-	rowCellsCount = xCells;
+	yCellsCount = yCells;
+	xCellsCount = xCells;
 
 	// Source: https://www.geeksforgeeks.org/create-dynamic-2d-array-inside-class-c/
 	// Instantiate each collumn in the grid
@@ -28,7 +28,12 @@ Grid::Grid(int xCells, int yCells)
 
 	// Instantiate each row in the grid
 	for (int i = 0; i < xCells; i++)
-		cells[i] = new Dead[xCells];
+		cells[i] = new Cell[xCells];
+
+	// Fill the new 2D array with dead cells
+	for (int y = 0; y < yCells; y++)
+		for (int x = 0; x < xCells; x++)
+			cells[x][y] = Dead();
 
 	// Calculate number of dividers needed
 	dividerCount = xCells + yCells - 2;
@@ -39,14 +44,14 @@ Grid::Grid(int xCells, int yCells)
 	// Horizontal dividers
 	for (; i < yCells - 1; i++)
 	{
-		dividers[i] = sf::RectangleShape(sf::Vector2f(500, 1));
-		dividers[i].move(0, (500.f/yCells) * (i + 1));
+		dividers[i] = sf::RectangleShape(sf::Vector2f((float)(window.getSize().x), 1.f));
+		dividers[i].move(0, ((float)window.getSize().y / yCells) * (i + 1));
 	}
 	// Vertical dividers
 	for (int j = 0; j < xCells - 1; j++)
 	{
-		dividers[j + i] = sf::RectangleShape(sf::Vector2f(1, 500));
-		dividers[j + i].move((500.f/xCells) * (j + 1), 0);
+		dividers[j + i] = sf::RectangleShape(sf::Vector2f(1.f, (float)(window.getSize().y)));
+		dividers[j + i].move(((float)window.getSize().x / xCells) * (j + 1), 0);
 	}
 }
 
@@ -62,5 +67,7 @@ void Grid::printGrid(sf::RenderWindow& window)
 	// Draw each divider
 	for (int i = 0; i < dividerCount; i++)
 		window.draw(dividers[i]);
+	// Draw once cell
+	cells[0][0].drawCell(window);
 }
 

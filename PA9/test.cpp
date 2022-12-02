@@ -18,6 +18,7 @@ void graphicsTest()
 #pragma region Pre-Window Setup
 	// Test array
 	int test[30];
+	memset(test, 0, 30);
 
 	// Iterator for selection sort
 	int b = 0, bMin = 0;
@@ -87,11 +88,11 @@ void graphicsTest()
 			// SFML Rectangle member function setOrigin changes the origin of the image (top left corner of image) to the two given pixel coordinates
 			items[i].setOrigin(0.f, test[i] - 500.f);
 
-			// Mark each changed rectangle red
+			// Mark each rectangle green when sorted
 			if (b == 30)
 				items[i].setFillColor(sf::Color::Green);
 
-			// Mark each rectangle green when sorted
+			// Mark each changed rectangle red
 			else if (bMin == i || b == i)
 				items[i].setFillColor(sf::Color::Red);
 		}
@@ -122,8 +123,8 @@ void graphicsTest()
 void printGridTest()
 {
 	// Instantiate a new test grid and window
-	Grid test(25, 25);
-	sf::RenderWindow window(sf::VideoMode(500, 500), "Grid Test");
+	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Grid Test");
+	Grid test(window, 10, 10);
 
 	while (window.isOpen())
 	{
