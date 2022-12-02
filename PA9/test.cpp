@@ -164,3 +164,54 @@ void printCellTest()
 		window.display();
 	}
 }
+
+// Test function gets user input via clicks of a mouse and finds the correct cell they clicked on
+// Programmers: Drew Evensen
+void userInputTest()
+{
+	// Instantiate new test grid, window, and cell
+	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Input Test");
+	Grid test(window, 10, 10);
+	Cell testCell(0, 0, 100, 100);
+
+	// Instantiate a hitbox for the mouse click
+	sf::RectangleShape mouseClick(sf::Vector2f(1.f, 1.f));
+
+	// Global variables to log the mouse's x and y coordinates
+	int x = 0;
+	int y = 0;
+
+	while (window.isOpen())
+	{
+		// Catches events in the window
+		sf::Event event;
+
+		while (window.pollEvent(event))
+		{
+			// Close the window upon clicking the X
+			if (event.type == sf::Event::Closed)
+				window.close();
+
+			// When the mouse is clicked
+			if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				// Get it's local coordinate position
+				x = sf::Mouse::getPosition(window).x;
+				y = sf::Mouse::getPosition(window).y;
+
+				// Set the hitbox to the mouse's position
+				mouseClick.setPosition((float)x, (float)y);
+
+				// Check for intersection
+				if (mouseClick.getGlobalBounds().intersects(testCell.cellShape().getGlobalBounds()))
+					std::cout << "Clicked on cell!" << std::endl;
+			}
+		}
+
+		// Display the grid
+		window.clear();
+		test.printGrid(window);
+		testCell.drawCell(window);
+		window.display();
+	}
+}
