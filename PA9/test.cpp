@@ -205,6 +205,15 @@ void userInputTest()
 				// Check for intersection
 				if (mouseClick.getGlobalBounds().intersects(testCell.cellShape().getGlobalBounds()))
 					std::cout << "Clicked on cell!" << std::endl;
+				for (int y = 0; y < test.numYCells(); y++)
+					for (int x = 0; x < test.numXCells(); x++)
+					{
+						if (test.getCellArray()[x][y].cellShape().getGlobalBounds().intersects(mouseClick.getGlobalBounds()))
+						{
+							std::cout << "Clicked: " << x << y << std::endl;
+						}
+					}
+
 			}
 		}
 
