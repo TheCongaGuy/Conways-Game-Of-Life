@@ -31,9 +31,13 @@ public:
 
 	sf::RectangleShape cellShape();
 
-private:
+protected:
 	sf::RectangleShape rectangleShape;
 
+	sf::Color cellColor;
+
+
+private:
 	int cell;
 
 	int x;

@@ -13,6 +13,7 @@
 
 class Dead : public Cell
 {
+public:
 	Dead();
 
 	~Dead();
@@ -23,5 +24,4 @@ class Dead : public Cell
 
 private:
 	bool dead;
-	sf::Color deadColor = sf::Color(255, 0, 0);
 };

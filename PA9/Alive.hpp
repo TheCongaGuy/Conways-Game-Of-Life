@@ -24,5 +24,4 @@ public:
 
 private:
 	bool alive;
-	sf::Color aliveColor = sf::Color(0, 0, 0);
 };
