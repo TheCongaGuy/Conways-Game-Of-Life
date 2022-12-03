@@ -4,10 +4,10 @@
 Alive::Alive()
 {
 	alive = true;
-	cellColor = sf::Color(0, 0, 0);
+	cellFillColor = sf::Color(0, 0, 0);
 
 	rectangleShape.setOutlineThickness(2);
-	rectangleShape.setFillColor(cellColor);
+	rectangleShape.setFillColor(cellFillColor);
 }
 
 Alive::~Alive() 
@@ -19,7 +19,7 @@ void Alive::setAlive(bool aliveCell)
 {
 	alive = aliveCell;
 
-	rectangleShape.setFillColor(cellColor);
+	rectangleShape.setFillColor(cellFillColor);
 }
 
 bool Alive::isAlive()

@@ -48,3 +48,4 @@ void Cell::setCell(float& newpositionx, float& newpositiony, float& newwidthx, f
 	rectangleShape.setPosition(newpositionx, newpositiony);
 }
 
+

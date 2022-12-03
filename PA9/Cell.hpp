@@ -31,10 +31,14 @@ public:
 
 	sf::RectangleShape cellShape();
 
+	//sf::RectangleShape cellColor();
+
 protected:
 	sf::RectangleShape rectangleShape;
 
-	sf::Color cellColor;
+	sf::Color cellFillColor;
+
+	sf::Color cellOutlineColor;
 
 
 private:
