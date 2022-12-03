@@ -5,6 +5,9 @@ Alive::Alive()
 {
 	alive = true;
 	cellColor = sf::Color(0, 0, 0);
+
+	rectangleShape.setOutlineThickness(2);
+	rectangleShape.setFillColor(cellColor);
 }
 
 Alive::~Alive() 

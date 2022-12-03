@@ -3,7 +3,11 @@
 Dead::Dead()
 {
 	dead = false;
-	cellColor = sf::Color(255, 0, 0);
+	cellColor = sf::Color(25, 25, 25);
+	rectangleShape.setOutlineColor(sf::Color(255, 255, 255));
+
+	rectangleShape.setOutlineThickness(2);
+	rectangleShape.setFillColor(cellColor);
 }
 
 Dead::~Dead()

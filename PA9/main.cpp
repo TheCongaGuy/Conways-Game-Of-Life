@@ -13,11 +13,11 @@ int main(int argc, char argv[])
 {
 	//graphicsTest();
 
-	//printGridTest();
+	printGridTest();
 
 	//printCellTest();
 
-	userInputTest();
+	//userInputTest();
 
 	return 0;
 }

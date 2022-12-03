@@ -67,7 +67,19 @@ void Grid::printGrid(sf::RenderWindow& window)
 	// Draw each divider
 	for (int i = 0; i < dividerCount; i++)
 		window.draw(dividers[i]);
-	// Draw once cell
-	cells[0][0].drawCell(window);
+	
+	// Draw each cell
+	for (int y = 0; y < yCellsCount; y++)
+		for (int x = 0; x < xCellsCount; x++)
+		{
+			float shiftX = x * (window.getSize().x / (dividerCount / 2));
+			float shiftY = y * (window.getSize().x / (dividerCount / 2));
+			float lengthX = (window.getSize().x / (dividerCount / 2));
+			float lengthY = (window.getSize().x / (dividerCount / 2));
+
+			cells[x][y].setCell(shiftX, shiftY, lengthX, lengthY);
+
+			cells[x][y].drawCell(window);
+		}
 }
 
