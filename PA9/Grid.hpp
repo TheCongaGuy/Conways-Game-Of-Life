@@ -22,6 +22,12 @@ public:
 	// Destructor - PROBLEM: MEMORY LEAK
 	~Grid();
 
+	// Getters
+	// 2D Cell Array
+	Cell**& getCellArray() { return cells; }
+	int numXCells() { return xCellsCount; }
+	int numYCells() { return yCellsCount; }
+
 	// Print the grid to the given window
 	void printGrid(sf::RenderWindow& window);
 
