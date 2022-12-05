@@ -4,7 +4,7 @@
  * Programming Assignment: 9	                                               *
  * Date: 12/07/22                                                              *
  *                                                                             *
- * Description: This file contains functions to set a cell on the grid to dead.															   *
+ * Description: This file contains functions to set a cell on the grid to dead.*														   *
  *******************************************************************************/
 
 #include "Dead.hpp"
@@ -14,7 +14,7 @@
 //contructor to set up the dead cell
 Dead::Dead()
 {
-	dead = false;
+	live = false;
 	cellFillColor = sf::Color(25, 25, 25);
 	rectangleShape.setOutlineColor(sf::Color(255, 255, 255));
 
@@ -32,7 +32,7 @@ Dead::~Dead()
 //setter to allow the cells to be set to dead
 void Dead::setDead(bool deadCell)
 {
-	dead = deadCell;
+	live = deadCell;
 
 	rectangleShape.setFillColor(cellFillColor);
 }
@@ -40,5 +40,5 @@ void Dead::setDead(bool deadCell)
 //confirms whether the cell is alive or dead
 bool Dead::isDead()
 {
-	return dead;
+	return live;
 }

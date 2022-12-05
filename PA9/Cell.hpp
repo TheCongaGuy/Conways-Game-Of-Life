@@ -6,7 +6,8 @@
  * Programming Assignment: 9	                                               *
  * Date: 12/07/22                                                              *
  *                                                                             *
- * Description:	This file contains functions that set up the cell shape and allows to to set and get a dead or alive cell.															   *
+ * Description:	This file contains functions that set up the cell shape and	   *
+ * allows to to set and get a dead or alive cell.							   *
  *******************************************************************************/
 
 #include <SFML/Graphics.hpp> // External Library
@@ -33,11 +34,6 @@ public:
 
 	//sf::RectangleShape cellColor(); //ended up not using this functiona dn just ssetting the colors within alive and dead constructors
 
-	//getters to get an alive or dead cell
-	bool getAlive() { return alive; };
-
-	bool getDead() { return dead; };
-
 protected:
 
 	//inherited in alive and dead classes
@@ -47,9 +43,7 @@ protected:
 
 	sf::Color cellOutlineColor;
 
-	bool alive;
-
-	bool dead;
+	bool live;
 
 
 private:

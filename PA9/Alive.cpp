@@ -4,7 +4,7 @@
  * Programming Assignment: 9	                                               *
  * Date: 12/07/22                                                              *
  *                                                                             *
- * Description: This file contains functions to set a cell on the grid to alive.															   *
+ * Description: This file contains functions to set a cell on the grid to alive*															   *
  *******************************************************************************/
 
 #include "Alive.hpp"
@@ -13,7 +13,7 @@
 //constructor to set alive to true and set the color of the cell
 Alive::Alive()
 {
-	alive = true;
+	live = true;
 	cellFillColor = sf::Color(0, 0, 0);
 
 	rectangleShape.setOutlineThickness(2);
@@ -29,7 +29,7 @@ Alive::~Alive()
 //setters to set a cell to alive
 void Alive::setAlive(bool aliveCell)
 {
-	alive = aliveCell;
+	live = aliveCell;
 
 	rectangleShape.setFillColor(cellFillColor);
 }
@@ -37,5 +37,5 @@ void Alive::setAlive(bool aliveCell)
 //confirm the cell is alive
 bool Alive::isAlive()
 {
-	return alive;
+	return live;
 }
