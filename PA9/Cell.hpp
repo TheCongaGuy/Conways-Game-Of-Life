@@ -6,7 +6,7 @@
  * Programming Assignment: 9	                                               *
  * Date: 12/07/22                                                              *
  *                                                                             *
- * Description:																   *
+ * Description:	This file contains functions that set up the cell shape and allows to to set and get a dead or alive cell.															   *
  *******************************************************************************/
 
 #include <SFML/Graphics.hpp> // External Library
@@ -22,7 +22,7 @@ public:
 	~Cell();
 
 
-
+	//a setter to allow you to set the position, width and height of a cell in the grid
 	void setCell(float &positionx, float &positiony, float &widthx, float &heighty);
 
 	//virtual void cellColor();  <- Throwing Linker Errors : Drew Evensen
@@ -31,19 +31,30 @@ public:
 
 	sf::RectangleShape cellShape();
 
-	//sf::RectangleShape cellColor();
+	//sf::RectangleShape cellColor(); //ended up not using this functiona dn just ssetting the colors within alive and dead constructors
+
+	//getters to get an alive or dead cell
+	bool getAlive() { return alive; };
+
+	bool getDead() { return dead; };
 
 protected:
+
+	//inherited in alive and dead classes
 	sf::RectangleShape rectangleShape;
 
 	sf::Color cellFillColor;
 
 	sf::Color cellOutlineColor;
 
+	bool alive;
+
+	bool dead;
+
 
 private:
 	int cell;
-
+	//to position the cell
 	int x;
 	int y;
 

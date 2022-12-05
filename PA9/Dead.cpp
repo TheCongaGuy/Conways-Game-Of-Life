@@ -1,5 +1,17 @@
-#include "Dead.hpp"
+/*******************************************************************************
+ * Programmers: Kaitlyn Cornish		                                           *
+ * Class: CptS 122				                                               *
+ * Programming Assignment: 9	                                               *
+ * Date: 12/07/22                                                              *
+ *                                                                             *
+ * Description: This file contains functions to set a cell on the grid to dead.															   *
+ *******************************************************************************/
 
+#include "Dead.hpp"
+#include "Cell.hpp"
+
+
+//contructor to set up the dead cell
 Dead::Dead()
 {
 	dead = false;
@@ -10,11 +22,14 @@ Dead::Dead()
 	rectangleShape.setFillColor(cellFillColor);
 }
 
+
+//deconstructor
 Dead::~Dead()
 {
 
 }
 
+//setter to allow the cells to be set to dead
 void Dead::setDead(bool deadCell)
 {
 	dead = deadCell;
@@ -22,6 +37,7 @@ void Dead::setDead(bool deadCell)
 	rectangleShape.setFillColor(cellFillColor);
 }
 
+//confirms whether the cell is alive or dead
 bool Dead::isDead()
 {
 	return dead;
