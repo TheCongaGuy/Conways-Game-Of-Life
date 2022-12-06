@@ -17,7 +17,9 @@ int main(int argc, char argv[])
 
 	//printCellTest();
 
-	userInputTest();
+	//userInputTest();
+
+	simulationTest();
 
 	return 0;
 }

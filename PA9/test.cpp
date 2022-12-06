@@ -37,8 +37,8 @@ void graphicsTest()
 	// Array of SFML rectangle objects to print to the screen
 	sf::RectangleShape items[30];
 
-	// Create new test window       (Size of Window)               (Title of Window)
-	sf::RenderWindow testWindow(sf::VideoMode(1200, 500), "Selection Sort Algorithm Example");
+	// Create new test window       (Size of Window)        (Title of Window)
+	sf::RenderWindow testWindow(sf::VideoMode(1200, 500), "Selection Sort Test");
 #pragma endregion
 
 #pragma region Window Open
@@ -124,7 +124,7 @@ void printGridTest()
 {
 	// Instantiate a new test grid and window
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Grid Test");
-	Grid test(window, 10, 10);
+	Grid test(window, 10);
 
 	while (window.isOpen())
 	{
@@ -145,8 +145,8 @@ void printGridTest()
 
 void printCellTest()
 {
-	Cell test(25, 25, 25, 25);
-	sf::RenderWindow window(sf::VideoMode(500, 500), "Grid Test");
+	Cell test(450, 450, 100, 100);
+	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Cell Test");
 
 	while (window.isOpen())
 	{
@@ -169,10 +169,9 @@ void printCellTest()
 // Programmers: Drew Evensen
 void userInputTest()
 {
-	// Instantiate new test grid, window, and cell
+	// Instantiate new test grid and window
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Input Test");
-	Grid test(window, 10, 10);
-	Cell testCell(0, 0, 100, 100);
+	Grid test(window, 10);
 
 	// Instantiate a hitbox for the mouse click
 	sf::RectangleShape mouseClick(sf::Vector2f(1.f, 1.f));
@@ -203,24 +202,64 @@ void userInputTest()
 				mouseClick.setPosition((float)x, (float)y);
 
 				// Check for intersection
-				if (mouseClick.getGlobalBounds().intersects(testCell.cellShape().getGlobalBounds()))
-					std::cout << "Clicked on cell!" << std::endl;
-				for (int y = 0; y < test.numYCells(); y++)
-					for (int x = 0; x < test.numXCells(); x++)
-					{
-						if (test.getCellArray()[x][y].cellShape().getGlobalBounds().intersects(mouseClick.getGlobalBounds()))
-						{
-							std::cout << "Clicked: " << x << y << std::endl;
-						}
-					}
-
+				test.processInput(mouseClick);
 			}
 		}
 
 		// Display the grid
 		window.clear();
 		test.printGrid(window);
-		testCell.drawCell(window);
 		window.display();
+	}
+}
+
+// Test function runs through a preset simulation without user input
+// Programmers: Drew Evensen
+void simulationTest()
+{
+	// Time object to set up a delta-time system
+	time_t deltaTime = clock();
+
+	// Instantiate a new test grid and window
+	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Simulation Test");
+	Grid test(window, 10);
+
+	// Set up initial grid configuration
+	test.defibCell(0, 0); // Static block of cells in top left corner
+	test.defibCell(0, 1);
+	test.defibCell(1, 0);
+	test.defibCell(1, 1);
+
+	test.defibCell(4, 3); // Blinker cell in center of grid
+	test.defibCell(4, 4);
+	test.defibCell(4, 5);
+
+	test.defibCell(9, 7); // Glider in bottom right corner
+	test.defibCell(8, 7);
+	test.defibCell(7, 7);
+	test.defibCell(7, 8);
+	test.defibCell(8, 9);
+
+	while (window.isOpen())
+	{
+		// Catches events in the window
+		sf::Event event;
+
+		// Close the window upon clicking the X
+		while (window.pollEvent(event))
+			if (event.type == sf::Event::Closed)
+				window.close();
+
+		// Display the grid
+		window.clear();
+		test.printGrid(window);
+		window.display();
+
+		// Only update every 250 milliseconds
+		if (difftime(clock(), deltaTime) >= 250)
+		{
+			test.update();
+			deltaTime = clock();
+		}
 	}
 }

@@ -16,29 +16,29 @@ class Grid
 {
 public:
 	// Constructor
-	// Takes the number of cells in each x and y direction and the window to configure to
-	Grid(sf::RenderWindow& window, int xCells = 1, int yCells = 1);
+	// Takes the side length of the grid in cells and the window to configure to
+	Grid(sf::RenderWindow& window, int sideLength = 1);
 
 	// Destructor - PROBLEM: MEMORY LEAK
 	~Grid();
 
-	// Getters
-	// 2D Cell Array
-	Cell**& getCellArray() { return cells; }
-	int numXCells() { return xCellsCount; }
-	int numYCells() { return yCellsCount; }
-
 	// Print the grid to the given window
 	void printGrid(sf::RenderWindow& window);
+
+	// Processes user input in the form of a hitbox
+	void processInput(sf::RectangleShape& mouseHitbox);
+
+	// Revives a dead cell or kills a live cell
+	// Takes the x and y position of the cell in the 2D array
+	void defibCell(int xPos, int yPos);
+
+	// Updates all cells in the array in accordance to Conway's rules
+	void update();
 
 private:
 	// Data Members
 	// Dynamic 2D array of cells
 	Cell** cells;
-	//Number of items in each array
-	int yCellsCount;
-	int xCellsCount;
-	int dividerCount;
-	// Dynamic array of rectangles to display to the grid as line dividers
-	sf::RectangleShape* dividers;
+	//Number of cells in each array
+	int rowCellCount;
 };

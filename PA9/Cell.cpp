@@ -19,7 +19,7 @@ Cell::Cell(float positionx, float positiony, float widthx, float heighty)
 	width = widthx;
 	height = heighty;
 
-	rectangleShape = sf::RectangleShape(sf::Vector2f(widthx, heighty));
+	rectangleShape.setSize(sf::Vector2f(widthx, heighty));
 	rectangleShape.setPosition(positionx, positiony);
 }
 
@@ -39,6 +39,14 @@ void Cell::drawCell(sf::RenderWindow& window)
 Cell::~Cell()
 {
 
+}
+
+// Method to get the state of the cell
+// Returns true if the cell is alive, false otherwise
+// Programmer: Drew Evensen
+bool Cell::getState()
+{
+	return live;
 }
 
 //allows you to set the position, height and width of the cell in the grid

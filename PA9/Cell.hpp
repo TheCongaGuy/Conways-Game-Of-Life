@@ -26,7 +26,10 @@ public:
 	//a setter to allow you to set the position, width and height of a cell in the grid
 	void setCell(float &positionx, float &positiony, float &widthx, float &heighty);
 
-	//virtual void cellColor();  <- Throwing Linker Errors : Drew Evensen
+	// Method to get the state of the cell
+	// Returns true if the cell is alive, false otherwise
+	// Programmer: Drew Evensen
+	bool getState();
 
 	void drawCell(sf::RenderWindow& window);
 

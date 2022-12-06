@@ -31,12 +31,14 @@ void printGridTest();
 // Programmers: Kaitlyn Cornish
 void printCellTest();
 
-// Programmers: Kaitlyn Cornish, Drew Evensen
-void printAliveCellTest();
-
-// Programmers: Kaitlyn Cornish, Drew Evensen
-void printDeadCellTest();
-
 // Test function gets user input via clicks of a mouse and finds the correct cell they clicked on
 // Programmers: Drew Evensen
 void userInputTest();
+
+// Test function runs through a preset simulation without user input
+// Programmers: Drew Evensen
+void simulationTest();
+
+// Test function runs an example game, waiting until the user places a set number of cells to begin the simulation
+// Programmers: Drew Evensen
+void runGameTest();
