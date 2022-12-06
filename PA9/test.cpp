@@ -221,24 +221,52 @@ void simulationTest()
 	time_t deltaTime = clock();
 
 	// Instantiate a new test grid and window
-	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Simulation Test");
-	Grid test(window, 10);
+	sf::RenderWindow window(sf::VideoMode(1300, 1300), "Simulation Test");
+	Grid test(window, 36);
 
 	// Set up initial grid configuration
-	test.defibCell(0, 0); // Static block of cells in top left corner
-	test.defibCell(0, 1);
-	test.defibCell(1, 0);
-	test.defibCell(1, 1);
-
-	test.defibCell(4, 3); // Blinker cell in center of grid
-	test.defibCell(4, 4);
-	test.defibCell(4, 5);
-
-	test.defibCell(9, 7); // Glider in bottom right corner
-	test.defibCell(8, 7);
-	test.defibCell(7, 7);
-	test.defibCell(7, 8);
-	test.defibCell(8, 9);
+#pragma region Glider Gun
+	// Left Boundry
+	test.defibCell(0, 14);
+	test.defibCell(0, 13);
+	test.defibCell(1, 14);
+	test.defibCell(1, 13);
+	// Right Boundry
+	test.defibCell(35, 12);
+	test.defibCell(35, 11);
+	test.defibCell(34, 12);
+	test.defibCell(34, 11);
+	// Left Component
+	test.defibCell(10, 13);
+	test.defibCell(10, 14);
+	test.defibCell(10, 15);
+	test.defibCell(11, 12);
+	test.defibCell(11, 16);
+	test.defibCell(12, 11);
+	test.defibCell(13, 11);
+	test.defibCell(12, 17);
+	test.defibCell(13, 17);
+	test.defibCell(14, 14);
+	test.defibCell(15, 12);
+	test.defibCell(15, 16);
+	test.defibCell(16, 13);
+	test.defibCell(16, 14);
+	test.defibCell(16, 15);
+	test.defibCell(17, 14);
+	// Right Component
+	test.defibCell(20, 11);
+	test.defibCell(20, 12);
+	test.defibCell(20, 13);
+	test.defibCell(21, 11);
+	test.defibCell(21, 12);
+	test.defibCell(21, 13);
+	test.defibCell(22, 10);
+	test.defibCell(22, 14);
+	test.defibCell(24, 9);
+	test.defibCell(24, 10);
+	test.defibCell(24, 14);
+	test.defibCell(24, 15);
+#pragma endregion
 
 	while (window.isOpen())
 	{
@@ -257,6 +285,88 @@ void simulationTest()
 
 		// Only update every 250 milliseconds
 		if (difftime(clock(), deltaTime) >= 250)
+		{
+			test.update();
+			deltaTime = clock();
+		}
+	}
+}
+
+// Test function runs an example game, waiting until the user places a set number of cells to begin the simulation
+// Programmers: Drew Evensen
+void runGameTest()
+{
+	// Bool to control state of the game
+	bool run = false;
+
+	// Time object to set up a delta-time system
+	time_t deltaTime = clock();
+
+	// Instantiate new test grid, window, start button, and font
+	sf::RenderWindow window(sf::VideoMode(1000, 1300), "Game Test");
+	Grid test(window, 20);
+	sf::RectangleShape button(sf::Vector2f(400, 250));
+	button.setFillColor(sf::Color::Green);
+
+	// Instantiate a hitbox for the mouse click
+	sf::RectangleShape mouseClick(sf::Vector2f(1.f, 1.f));
+
+	// Global variables to log the mouse's x and y coordinates
+	int x = 0;
+	int y = 0;
+
+	// Shift the button down to the bottom of the screen
+	int buttonX = 300, buttonY = 1025;
+	button.setPosition(buttonX, buttonY);
+
+	while (window.isOpen())
+	{
+		// Catches events in the window
+		sf::Event event;
+
+		while (window.pollEvent(event))
+		{
+			// Close the window upon clicking the X
+			if (event.type == sf::Event::Closed)
+				window.close();
+
+			// When the mouse is clicked
+			if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				// Get it's local coordinate position
+				x = sf::Mouse::getPosition(window).x;
+				y = sf::Mouse::getPosition(window).y;
+
+				// Set the hitbox to the mouse's position
+				mouseClick.setPosition((float)x, (float)y);
+
+				// Check for intersections
+				test.processInput(mouseClick);
+
+				if (button.getGlobalBounds().intersects(mouseClick.getGlobalBounds()))
+				{
+					if (run)
+					{
+						run = false;
+						button.setFillColor(sf::Color::Green);
+					}
+					else
+					{
+						run = true;
+						button.setFillColor(sf::Color::Red);
+					}
+				}
+			}
+		}
+
+		// Display the grid
+		window.clear();
+		test.printGrid(window);
+		window.draw(button);
+		window.display();
+
+		// Only update every 250 milliseconds
+		if (difftime(clock(), deltaTime) >= 250 && run)
 		{
 			test.update();
 			deltaTime = clock();

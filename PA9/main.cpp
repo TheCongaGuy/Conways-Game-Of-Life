@@ -11,15 +11,17 @@
 
 int main(int argc, char argv[])
 {
-	//graphicsTest();
+	graphicsTest();
 
-	//printGridTest();
+	printGridTest();
 
-	//printCellTest();
+	printCellTest();
 
-	//userInputTest();
+	userInputTest();
 
 	simulationTest();
+
+	runGameTest();
 
 	return 0;
 }

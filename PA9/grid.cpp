@@ -88,7 +88,7 @@ void Grid::update()
 {
 	// Instantiate an array to store the current cell's neigbors and an array to store which cells need to be changed
 	bool neighbors[9];
-	bool defibCells[100];
+	bool* defibCells = new bool[rowCellCount * rowCellCount];
 	for (int i = 0; i < rowCellCount * rowCellCount; i++)
 		defibCells[i] = false;
 	int curCell = 0;
@@ -144,4 +144,6 @@ void Grid::update()
 				defibCell(x, y);
 			curCell++;
 		}
+
+	delete defibCells;
 }
