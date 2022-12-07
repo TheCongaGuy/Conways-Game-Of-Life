@@ -31,7 +31,7 @@ public:
 	// Programmer: Drew Evensen
 	bool getState();
 
-	sf::RectangleShape setPlayerColor();
+	void setPlayerColor(sf::Color newFillColor);
 
 	void drawCell(sf::RenderWindow& window);
 

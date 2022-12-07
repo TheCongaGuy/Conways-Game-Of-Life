@@ -23,38 +23,6 @@ int main(int argc, char argv[])
 	//runGameTest();
 #pragma endregion
 
-	// Info Blerb before Game Start
-	std::cout << std::endl << "Conway's game of life is a sandbox with no clear goal except to create interesting patterns" << std::endl
-		<< "and experiment with the rules of the game. If you want a few games you can play with someone, here" << std::endl
-		<< "are some ideas:" << std::endl;
-
-	std::cout << std::endl << "HOW TO PLAY:" << std::endl
-		<< "Before the game starts, left click on any square in the grid to place a cell.If you want to remove a" << std::endl
-		<< "cell, left click it again and it'll dissapear! When you're ready to begin the simulation, press the green " << std::endl
-		<< "button at the bottom of the window. Want to stop the simulation? Click the button againand the cells will stop in" << std::endl
-		<< "place! Lastly, at any time you can click on a square to delete or create a cell." << std::endl;
-
-	std::cout << std::endl << "Cellular Roulette:" << std::endl
-		<< "Player 1 creates an initial start and runs the simulation. From there, wait for a stable state." << std::endl
-		<< "Player 2 then creates or destroys one cell on the game board. The placed cell needs to be next to the stable state." << std::endl
-		<< "Wait for the simulation to reach a stable state again and swap roles." << std::endl
-		<< "Whoever causes all cells to die loses! Even if that's in the initial configuration!" << std::endl << std::endl;
-
-	std::cout << "Auto Immune:" << std::endl
-		<< "Player 1 creates cells on the left side of the grid, and player 2 places cells on the right side of the grid." << std::endl
-		<< "Run the simulation." << std::endl
-		<< "If the board reaches a stable state with cells remaining on both sides, pause the simulation" << std::endl
-		<< "Each player may then place (not destroy) more cells on their respective sides." << std::endl
-		<< "Whoever still has cells on their side of the board wins! Get creative! Can you send your own cells to kill" << std::endl
-		<< "the other player's?" << std::endl << std::endl;
-
-	std::cout << "Sturdy Cells:" << std::endl
-		<< "Player 1 places cells on the grid and runs the simulation until the board reaches a stable state." << std::endl
-		<< "Both players will then pause the simulation, place a configuration of cells and run the simulation again." << std::endl
-		<< "The player who disturbs the state of the other stable cells loses!" << std::endl << std::endl;
-
-	system("pause");
-
 	// Controls the state of the game
 	bool run = false;
 
@@ -62,8 +30,8 @@ int main(int argc, char argv[])
 	int x = 0;
 	int y = 0;
 	// Controls the button's position
-	int buttonX = 240; 
-	int buttonY = 820;
+	float buttonX = 240; 
+	float buttonY = 820;
 
 	// Delta-Time to ensure a smooth simulation across all machines
 	time_t deltaTime = clock();
@@ -73,6 +41,10 @@ int main(int argc, char argv[])
 
 	// Grid for game to take place in
 	Grid game(window, 25);
+
+	// Color Selection for Player
+	sf::RectangleShape colors[4];
+	std::fill(colors, colors + 4, sf::RectangleShape(sf::Vector2f(60, 60)));
 
 	// Button to control flow of the simulation
 	sf::RectangleShape button(sf::Vector2f(308, 193));
@@ -92,6 +64,20 @@ int main(int argc, char argv[])
 	button.setPosition(buttonX, buttonY);
 	playText.setPosition(buttonX, buttonY);
 	pauseText.setPosition(buttonX + 77, buttonY + 135);
+
+	// Set up color selection buttons
+	colors[0].setFillColor(sf::Color(205, 205, 205)); // Default White
+	colors[0].setOutlineColor(sf::Color(3, 150, 98));
+	colors[0].setOutlineThickness(2);
+	colors[1].setFillColor(sf::Color(2, 70, 42)); // Dark Green
+	colors[2].setFillColor(sf::Color(139, 0, 0)); // Dark Red
+	colors[3].setFillColor(sf::Color(0, 0, 139)); // Dark Blue
+
+	// Move color selection buttons to the correct spot
+	colors[0].setPosition(60, 800);
+	colors[1].setPosition(60, 900);
+	colors[2].setPosition(650, 800);
+	colors[3].setPosition(650, 900);
 
 	while (window.isOpen())
 	{
@@ -117,6 +103,7 @@ int main(int argc, char argv[])
 				// Check for intersections
 				game.processInput(mouseClick);
 
+				// Play Button Check
 				if (button.getGlobalBounds().intersects(mouseClick.getGlobalBounds()))
 				{
 					if (run)
@@ -130,15 +117,38 @@ int main(int argc, char argv[])
 						button.setFillColor(sf::Color::Red);
 					}
 				}
+
+				// Color Selection Check
+				for (int i = 0; i < 4; i++)
+					if (colors[i].getGlobalBounds().intersects(mouseClick.getGlobalBounds()))
+					{
+						// Set the players color to the selected button's color
+						game.setPlayerColor(colors[i].getFillColor());
+						pauseText.setFillColor(colors[i].getFillColor());
+						colors[i].setOutlineColor(sf::Color(2, 100, 64));
+						colors[i].setOutlineThickness(2);
+
+						// Remove highlight showing which button was selected
+						for (int j = 0; j < 4; j++)
+							if (j != i)
+								colors[j].setOutlineThickness(0);
+
+						break;
+					}
 			}
 		}
 
-		// Display the grid
 		window.clear();
+
+		// Display the grid
 		game.printGrid(window);
+		// Display the button with correct text
 		window.draw(button);
-		// Display the correct text
 		run ? window.draw(pauseText) : window.draw(playText);
+		// Display color choices
+		for (int i = 0; i < 4; i++)
+			window.draw(colors[i]);
+
 		window.display();
 
 		// Only update every 250 milliseconds

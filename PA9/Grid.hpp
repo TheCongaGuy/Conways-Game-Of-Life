@@ -28,6 +28,10 @@ public:
 	// Destructor
 	~Grid();
 
+	// Sets the player's cell color to a new color
+	// Takes a reference to a sfml color
+	void setPlayerColor(sf::Color newColor);
+
 	// Print the grid to the given window
 	// Takes a reference to the window it is drawing to
 	void printGrid(sf::RenderWindow& window);
@@ -35,6 +39,7 @@ public:
 	// Processes user input in the form of a hitbox
 	// Takes a reference of the hitbox to be evaluated
 	void processInput(sf::RectangleShape& mouseHitbox);
+
 
 	// Revives a dead cell or kills a live cell
 	// Takes the x and y position of the cell in the 2D array
@@ -45,6 +50,8 @@ public:
 
 private:
 	// Data Members
+	// Player's cell color
+	sf::Color playerColor;
 	// Dynamic 2D array of cells
 	Cell** cells;
 	//Number of cells on each side

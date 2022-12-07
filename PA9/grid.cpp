@@ -23,6 +23,9 @@ Grid::Grid(sf::RenderWindow& window, int sideLength)
 	if (sideLength < 1)
 		sideLength = 1;
 
+	// Set default cell color
+	playerColor = sf::Color(205, 205, 205);
+
 	// Record number of cells
 	rowCellCount = sideLength;
 
@@ -50,6 +53,13 @@ Grid::~Grid()
 	delete[] cells;
 }
 
+// Sets the player's cell color to a new color
+// Takes a reference to a sfml color
+void Grid::setPlayerColor(sf::Color newColor)
+{
+	playerColor = newColor;
+}
+
 // Print the grid to the given window
 // Takes a reference to the window it is drawing to
 void Grid::printGrid(sf::RenderWindow& window)
@@ -65,6 +75,10 @@ void Grid::printGrid(sf::RenderWindow& window)
 
 			// Shift the cell
 			cells[x][y].setCell(shiftX, shiftY, length, length);
+
+			// Set the cell to the player's color
+			if (cells[x][y].getState())
+				cells[x][y].setPlayerColor(playerColor);
 
 			// Draw the cell
 			cells[x][y].drawCell(window);
