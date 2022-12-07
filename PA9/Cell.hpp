@@ -6,11 +6,11 @@
  * Programming Assignment: 9	                                               *
  * Date: 12/07/22                                                              *
  *                                                                             *
- * Description:	This file contains functions that set up the cell shape and	   *
- * allows to to set and get a dead or alive cell.							   *
+ * Description:	This file contains functions that set up the cell shape and    *
+ *				allows to to set and get a dead or alive cell.				   *
  *******************************************************************************/
 
-#include <SFML/Graphics.hpp> // External Library
+#include <SFML/Graphics.hpp>// External Library
 
 class Cell
 {

@@ -14,7 +14,7 @@
 Alive::Alive()
 {
 	live = true;
-	cellFillColor = sf::Color(255, 255, 255);
+	cellFillColor = sf::Color(205, 205, 205);
 
 	rectangleShape.setOutlineThickness(2);
 	rectangleShape.setFillColor(cellFillColor);

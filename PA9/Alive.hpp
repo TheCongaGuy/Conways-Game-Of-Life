@@ -6,7 +6,7 @@
  * Programming Assignment: 9	                                               *
  * Date: 12/07/22                                                              *
  *                                                                             *
- * Description:	This file contains functions to set a cell on the grid to alive.															   *
+ * Description:	This file contains functions to set a cell on the grid to alive*															   *
  *******************************************************************************/
 
 #include "Cell.hpp"
