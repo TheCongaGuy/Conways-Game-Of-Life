@@ -31,11 +31,12 @@ public:
 	// Programmer: Drew Evensen
 	bool getState();
 
+	sf::RectangleShape setPlayerColor();
+
 	void drawCell(sf::RenderWindow& window);
 
 	sf::RectangleShape cellShape();
 
-	//sf::RectangleShape cellColor(); //ended up not using this functiona dn just ssetting the colors within alive and dead constructors
 
 protected:
 

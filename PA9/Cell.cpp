@@ -50,6 +50,11 @@ bool Cell::getState()
 	return live;
 }
 
+sf::RectangleShape setPlayerColor(sf::Color newFillColor)
+{
+	sf::Color cellFillColor = newFillColor;
+}
+
 //allows you to set the position, height and width of the cell in the grid
 void Cell::setCell(float& newpositionx, float& newpositiony, float& newwidthx, float& newheighty)
 {
