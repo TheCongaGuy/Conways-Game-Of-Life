@@ -1,90 +1,163 @@
-#include <SFML/Graphics.hpp>// External Library
-#include <iostream>
-#include <random>
-#include <Windows.h>
-#include <time.h>
+/*******************************************************************************
+ * Programmers: Drew Evensen, Kaitlyn Cornish                                  *
+ * Class: CptS 122				                                               *
+ * Programming Assignment: 9	                                               *
+ * Date: 12/07/22                                                              *
+ *                                                                             *
+ * Description:																   *
+ *******************************************************************************/
+
+//#include "Test.hpp"
+#include "Grid.hpp"
+#include <iostream> // std::cout
+#include <time.h> // clock(), difftime()
 
 int main(int argc, char argv[])
 {
-#pragma region Test Code
-	int test[30];
+#pragma region Test Cases
+	//graphicsTest();
+	//printGridTest();
+	//printCellTest();
+	//userInputTest();
+	//simulationTest();
+	//runGameTest();
+#pragma endregion
 
-	srand(time(NULL));
+	// Controls the state of the game
+	bool run = false;
 
-	for (int i = 0; i < 30; i++)
-		test[i] = rand() % 500 + 1;
+	// Logs the mouse's x and y coordinates
+	int x = 0;
+	int y = 0;
+	// Controls the button's position
+	float buttonX = 240; 
+	float buttonY = 820;
 
-	std::cout << "Test Array Initialized. Starting Config:" << std::endl;
+	// Delta-Time to ensure a smooth simulation across all machines
+	time_t deltaTime = clock();
 
-	for (int i = 0; i < 30; i++)
-		std::cout << test[i] << ", ";
-#pragma endregion Code used in initial file setup to ensure RenderWindow is working properly
+	// Window for gameplay
+	sf::RenderWindow window(sf::VideoMode(770, 1000), "Conway's Game of Life");
 
-	// Iterator for bubble sort
-	int b = 0, bMin = 0;
+	// Grid for game to take place in
+	Grid game(window, 25);
 
-	// Array of rectangle objects to print to the screen
-	sf::RectangleShape items[30];
+	// Color Selection for Player
+	sf::RectangleShape colors[4];
+	std::fill(colors, colors + 4, sf::RectangleShape(sf::Vector2f(60, 60)));
 
-	// Create new test window (500 pixels by 1200 pixels)      (Title of Window)
-	sf::RenderWindow testWindow(sf::VideoMode(1200, 500), "Bubble Sort Algorithm Example");
+	// Button to control flow of the simulation
+	sf::RectangleShape button(sf::Vector2f(308, 193));
+	button.setFillColor(sf::Color::Green);
+	sf::Font textFont;
+	// Hitbox for the mouse click
+	sf::RectangleShape mouseClick(sf::Vector2f(1.f, 1.f));
 
-	// Run while the window is open
-	while (testWindow.isOpen())
+	// Set up the button before start
+	textFont.loadFromFile("block.ttf");
+	sf::Text playText("Play", textFont, 46);
+	playText.setFillColor(sf::Color(25, 25, 25));
+	sf::Text pauseText("Pause", textFont, 46);
+	pauseText.setFillColor(sf::Color(205, 205, 205));
+
+	// Shift the button down to the bottom of the screen before runtime
+	button.setPosition(buttonX, buttonY);
+	playText.setPosition(buttonX, buttonY);
+	pauseText.setPosition(buttonX + 77, buttonY + 135);
+
+	// Set up color selection buttons
+	colors[0].setFillColor(sf::Color(205, 205, 205)); // Default White
+	colors[0].setOutlineColor(sf::Color(3, 150, 98));
+	colors[0].setOutlineThickness(2);
+	colors[1].setFillColor(sf::Color(2, 70, 42)); // Dark Green
+	colors[2].setFillColor(sf::Color(139, 0, 0)); // Dark Red
+	colors[3].setFillColor(sf::Color(0, 0, 139)); // Dark Blue
+
+	// Move color selection buttons to the correct spot
+	colors[0].setPosition(60, 800);
+	colors[1].setPosition(60, 900);
+	colors[2].setPosition(650, 800);
+	colors[3].setPosition(650, 900);
+
+	while (window.isOpen())
 	{
-		// Catches an event in the window
+		// Catches events in the window
 		sf::Event event;
 
-		// Close the window upon clicking the X
-		while (testWindow.pollEvent(event))
-			if (event.type == sf::Event::Closed())
-				testWindow.close();
-
-		// Iterate a step through the sorting algorithm
-		if (b < 30)
+		while (window.pollEvent(event))
 		{
-			bMin = b;
-			for (int i = b; i < 30; i++)
-				if (test[i] < test[bMin])
-					bMin = i;
+			// Close the window upon clicking the X
+			if (event.type == sf::Event::Closed)
+				window.close();
 
-			int temp = test[b];
-			test[b] = test[bMin];
-			test[bMin] = temp;
+			// When the mouse is clicked
+			if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				// Get it's local coordinate position
+				x = sf::Mouse::getPosition(window).x;
+				y = sf::Mouse::getPosition(window).y;
 
-			b++;
+				// Set the hitbox to the mouse's position
+				mouseClick.setPosition((float)x, (float)y);
+
+				// Check for intersections
+				game.processInput(mouseClick);
+
+				// Play Button Check
+				if (button.getGlobalBounds().intersects(mouseClick.getGlobalBounds()))
+				{
+					if (run)
+					{
+						run = false;
+						button.setFillColor(sf::Color::Green);
+					}
+					else
+					{
+						run = true;
+						button.setFillColor(sf::Color::Red);
+					}
+				}
+
+				// Color Selection Check
+				for (int i = 0; i < 4; i++)
+					if (colors[i].getGlobalBounds().intersects(mouseClick.getGlobalBounds()))
+					{
+						// Set the players color to the selected button's color
+						game.setPlayerColor(colors[i].getFillColor());
+						pauseText.setFillColor(colors[i].getFillColor());
+						colors[i].setOutlineColor(sf::Color(2, 100, 64));
+						colors[i].setOutlineThickness(2);
+
+						// Remove highlight showing which button was selected
+						for (int j = 0; j < 4; j++)
+							if (j != i)
+								colors[j].setOutlineThickness(0);
+
+						break;
+					}
+			}
 		}
 
-		// Create each rectangle item
-		for (int i = 0; i < 30; i++)
+		window.clear();
+
+		// Display the grid
+		game.printGrid(window);
+		// Display the button with correct text
+		window.draw(button);
+		run ? window.draw(pauseText) : window.draw(playText);
+		// Display color choices
+		for (int i = 0; i < 4; i++)
+			window.draw(colors[i]);
+
+		window.display();
+
+		// Only update every 250 milliseconds
+		if (difftime(clock(), deltaTime) >= 250 && run)
 		{
-			items[i] = sf::RectangleShape(sf::Vector2f(40, test[i]));
-			items[i].setFillColor(sf::Color::White);
-			items[i].setOrigin(0, -500 + test[i]);
-
-			// Mark each changed rectangle red
-			if (b == 30)
-				items[i].setFillColor(sf::Color::Green);
-
-			// Mark each rectangle green when sorted
-			else if (bMin == i || b == i)
-				items[i].setFillColor(sf::Color::Red);
+			game.update();
+			deltaTime = clock();
 		}
-
-		// Clear the window
-		testWindow.clear();
-
-		// Draw the items to the screen
-		for (int i = 0; i < 30; i++)
-		{
-			// Shift each rectangle to the correct position before drawing
-			items[i].move(i * 40, 0);
-			testWindow.draw(items[i]);
-		}
-
-		// Draw the window
-		testWindow.display();
-
-		Sleep(100);
 	}
+
+	return 0;
 }
