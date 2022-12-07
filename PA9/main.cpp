@@ -69,13 +69,13 @@ int main(int argc, char argv[])
 	time_t deltaTime = clock();
 
 	// Window for gameplay
-	sf::RenderWindow window(sf::VideoMode(800, 1040), "Conway's Game of Life");
+	sf::RenderWindow window(sf::VideoMode(770, 1000), "Conway's Game of Life");
 
 	// Grid for game to take place in
 	Grid game(window, 25);
 
 	// Button to control flow of the simulation
-	sf::RectangleShape button(sf::Vector2f(320, 200));
+	sf::RectangleShape button(sf::Vector2f(308, 193));
 	button.setFillColor(sf::Color::Green);
 	sf::Font textFont;
 	// Hitbox for the mouse click
@@ -83,15 +83,15 @@ int main(int argc, char argv[])
 
 	// Set up the button before start
 	textFont.loadFromFile("block.ttf");
-	sf::Text playText("Play", textFont, 48);
+	sf::Text playText("Play", textFont, 46);
 	playText.setFillColor(sf::Color(25, 25, 25));
-	sf::Text pauseText("Pause", textFont, 48);
+	sf::Text pauseText("Pause", textFont, 46);
 	pauseText.setFillColor(sf::Color(205, 205, 205));
 
 	// Shift the button down to the bottom of the screen before runtime
 	button.setPosition(buttonX, buttonY);
 	playText.setPosition(buttonX, buttonY);
-	pauseText.setPosition(buttonX + 80, buttonY + 144);
+	pauseText.setPosition(buttonX + 77, buttonY + 135);
 
 	while (window.isOpen())
 	{
