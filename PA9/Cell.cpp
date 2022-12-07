@@ -14,6 +14,8 @@
 //constructor to et up the cell shape and position
 Cell::Cell(float positionx, float positiony, float widthx, float heighty)
 {
+	live = true;
+
 	x = positionx;
 	y = positiony;
 

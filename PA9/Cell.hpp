@@ -51,12 +51,11 @@ protected:
 
 
 private:
-	int cell;
 	//to position the cell
-	int x;
-	int y;
+	float x;
+	float y;
 
-	int width;
-	int height;
+	float width;
+	float height;
 
 };

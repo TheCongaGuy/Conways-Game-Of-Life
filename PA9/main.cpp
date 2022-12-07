@@ -4,7 +4,8 @@
  * Programming Assignment: 9	                                               *
  * Date: 12/07/22                                                              *
  *                                                                             *
- * Description:																   *
+ * Description:	Runs Conway's Game of Life with user input, start and stopping,*
+ *				and customization.											   *
  *******************************************************************************/
 
 //#include "Test.hpp"
