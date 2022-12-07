@@ -62,20 +62,20 @@ int main(int argc, char argv[])
 	int x = 0;
 	int y = 0;
 	// Controls the button's position
-	int buttonX = 300; 
-	int buttonY = 1025;
+	int buttonX = 240; 
+	int buttonY = 820;
 
 	// Delta-Time to ensure a smooth simulation across all machines
 	time_t deltaTime = clock();
 
 	// Window for gameplay
-	sf::RenderWindow window(sf::VideoMode(1000, 1300), "Conway's Game of Life");
+	sf::RenderWindow window(sf::VideoMode(800, 1040), "Conway's Game of Life");
 
 	// Grid for game to take place in
-	Grid game(window, 30);
+	Grid game(window, 25);
 
 	// Button to control flow of the simulation
-	sf::RectangleShape button(sf::Vector2f(400, 250));
+	sf::RectangleShape button(sf::Vector2f(320, 200));
 	button.setFillColor(sf::Color::Green);
 	sf::Font textFont;
 	// Hitbox for the mouse click
@@ -83,15 +83,15 @@ int main(int argc, char argv[])
 
 	// Set up the button before start
 	textFont.loadFromFile("block.ttf");
-	sf::Text playText("Play", textFont, 60);
+	sf::Text playText("Play", textFont, 48);
 	playText.setFillColor(sf::Color(25, 25, 25));
-	sf::Text pauseText("Pause", textFont, 60);
+	sf::Text pauseText("Pause", textFont, 48);
 	pauseText.setFillColor(sf::Color(205, 205, 205));
 
 	// Shift the button down to the bottom of the screen before runtime
 	button.setPosition(buttonX, buttonY);
 	playText.setPosition(buttonX, buttonY);
-	pauseText.setPosition(buttonX + 100, buttonY + 180);
+	pauseText.setPosition(buttonX + 80, buttonY + 144);
 
 	while (window.isOpen())
 	{
